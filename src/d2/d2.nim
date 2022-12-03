@@ -1,10 +1,12 @@
 import std/strutils
 import std/algorithm
 import "../util"
+const input = staticRead("p1input")
 
 const ROCK = 1
 const PAPER = 2
 const SCISSORS = 3
+
   
 proc getWinner(a,b: int): int =
   if a == b:
@@ -49,8 +51,6 @@ proc getMoveP2(throws: char, theirMove: char,them: openArray[char]): int =
 const them = ['A','B','C']
 const you = ['X','Y','Z']
 const moves = [ROCK,PAPER,SCISSORS]
-
-const input = staticRead("p1input")
 
 
 var p1Total,p2Total = 0
