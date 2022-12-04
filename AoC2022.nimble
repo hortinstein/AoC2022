@@ -9,7 +9,7 @@ srcDir        = "src"
 binDir        = "bin"
 
 installExt    = @["nim"]
-bin           = @["d1/d1","d2/d2","d3/d3"]
+bin           = @["d1/d1","d2/d2","d3/d3", "d4/d4"]
 
 # Dependencies
 requires "nim >= 1.6.6"

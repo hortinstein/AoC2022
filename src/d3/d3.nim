@@ -10,7 +10,6 @@ proc returnValue(c: char): int =
   else:
     return ord(c) - ord('A') + 27
 
-
 #test cases from the problem
 assert(16 == returnValue('p'))
 assert(38 == returnValue('L'))
