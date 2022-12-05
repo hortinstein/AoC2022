@@ -40,21 +40,27 @@ for tower in 0..numBins-1:
 var curTower = 0
 var j=i-1
 while j>0:
-  echo lines[j]
+  #echo lines[j]
   j-=1
   var k = 0
   var curTower =0
   while k+2<lines[j].len:
-    echo lines[j][k..k+2], "*"
+    #echo lines[j][k..k+2], "*"
     
     if lines[j][k+1] != ' ':
       towers[curTower].add(lines[j][k+1])
     k+=4
     curTower+=1
-echo towers
+#echo towers
 
-
-
+i+=1
+while i < lines.len:
+  let instruction= lines[i].split()
+  let number = instruction[1]
+  let origin = instruction[3]
+  let dest = instruction[5]
+  echo "moving ", number, " boxes from ", origin, " to ", dest
+  i+=1
 
 
 
