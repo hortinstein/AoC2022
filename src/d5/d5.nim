@@ -4,17 +4,8 @@ import std/sets
 
 import std/algorithm
 
-#const input = staticRead("p1input")
+const input = staticRead("p1input")
 #https://stackoverflow.com/questions/30298950/initialize-a-seq-of-seqs
-const input= """    [D]    
-[N] [C]    
-[Z] [M] [P]
- 1   2   3 
-
-move 1 from 2 to 1
-move 3 from 1 to 3
-move 2 from 2 to 1
-move 1 from 1 to 2"""
   
 #finds the index of the line where instructions start
 var i = 0
