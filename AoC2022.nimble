@@ -9,15 +9,16 @@ srcDir        = "src"
 binDir        = "bin"
 
 installExt    = @["nim"]
-bin           = @["d1/d1","d2/d2","d3/d3", "d4/d4","d5/d5"]
+
+namedBin = {"d1/d1": "d1", 
+            "d2/d2": "d2", 
+            "d3/d3": "d3", 
+            "d4/d4": "d4",
+            "d5/d5": "d5",
+            "d6/d6": "d6"}.toTable()
 
 # Dependencies
 requires "nim >= 1.6.6"
-requires "puppy"
-requires "flatty"
-requires "monocypher"
-requires "printdebug"
-
 
 task install, "Install the package":
   exec "nimble install"
