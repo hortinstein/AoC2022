@@ -1,6 +1,7 @@
 import std/strutils
 import std/sequtils
 import std/sets
+import sequtils
 
 import std/algorithm
 
@@ -44,24 +45,38 @@ while j>0:
     curTower+=1
 #echo towers
 
+#create a copy for part 2
+var towers2  =  towers
+ 
 i+=1 #instruction number
 while i < lines.len:
   let instruction= lines[i].split()
   let number =parseInt(instruction[1])
   let origin =parseInt(instruction[3])
   let dest = parseInt(instruction[5])
-  echo "moving ", number, " boxes from ", origin, " to ", dest
+  #echo "moving ", number, " boxes from ", origin, " to ", dest
   j=0 #box counter
-  echo towers
+  #echo towers
   while j < number:
+    #move the top box from origin to dest for part 1
     let move = towers[origin-1].pop()
     towers[dest-1].add(move)
-    echo towers
+    
     j+=1
+  
+  #move the slice of boxes
+  let move = towers2[origin-1][^number..^1]#gets the slice from the origin
+  for item in move:
+    discard towers2[origin-1].pop() #removes items in the slide
+    towers2[dest-1].add(item) #adds the items in order
   i+=1
 
 var topString = ""
 for tower in towers:
   topString.add( $tower[^1])
+var topString2 = ""
+for tower in towers2:
+  topString2.add( $tower[^1])
   
-echo topString
+echo "P1:",topString
+echo "P2:",topString2
