@@ -10,7 +10,8 @@ binDir        = "bin"
 
 installExt    = @["nim"]
 
-namedBin = {"d1/d1": "d1", 
+namedBin = {"benchmark": "benchmark",
+            "d1/d1": "d1", 
             "d2/d2": "d2", 
             "d3/d3": "d3", 
             "d4/d4": "d4",
@@ -23,3 +24,5 @@ requires "nim >= 1.6.6"
 task install, "Install the package":
   exec "nimble install"
 
+task benchmark, "benchmarks the executables":
+  exec "nimble install"
