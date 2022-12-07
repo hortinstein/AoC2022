@@ -7,30 +7,24 @@ import algorithm
 var programs = newSeq[string]()
 
 for day in walkDir("./bin"):
-  if day.path == "bin/benchmark":
+  #skips benchmark since recursive lol
+  if day.path == "bin/benchmark": 
     continue
   programs.add("\'"&day.path&"\'")
+
+#sorts it so it's in the days order
 sort(programs)
 
-echo programs
-
+#uses hyperfine to benchmark the programs
 let cmd = "hyperfine -N --export-markdown BENCHMARKS.md " & join(programs, " ")
-echo cmd
 let outpShell = execProcess(cmd)
 echo splitLines(outpShell)
 
-# Define the path to the file
 let filePath = "README.md"
-
-# Use the `readFile` function to read the contents of the file
-# into a string
 let fileContent = readFile(filePath)
-
-# Use the `split` function to split the string into a sequence
-# of lines
 var lines = fileContent.split('\n')
 
-# remove the last benchmark
+# go till the last benchmark and ditch the rest
 var i = 0
 var preAmble = ""
 while i < lines.len:
