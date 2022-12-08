@@ -23,11 +23,11 @@ for line in lines:
   for height in treeHeights:
     let heightInt = parseInt($height)
     row.add(heightInt)
-  trees.add(row)    
+  trees.add(row)   
 
 proc checkVis(trees: seq[seq[int]],x: int, y: int): bool=
   let checkHeight = trees[y][x] #rows/columns
-  #echo red("new item checked: "& $checkHeight)  
+  echo red("new item checked: "& $checkHeight)  
   if (x == 0 or y == 0 or x == trees[0].len-1 or y == trees.len-1): #check edge
     #echo "corner/edge"
     return true
@@ -56,18 +56,45 @@ proc checkVis(trees: seq[seq[int]],x: int, y: int): bool=
     return true
   return false
 
+proc siteLine(lineOfSight: seq[int], height: int): int=
+  if (lineOfSight.len==0): return 0
+  var i = 0
+  while (i<lineOfSight.len):
+    if (lineOfSight[i] >= height): return i+1
+    i+=1
+  return i
+
+proc checkScenery(lineOfSight: seq[seq[int]], x: int, y: int): int=
+  let checkHeight = trees[y][x] #rows/columns
+  var col = newSeq[int]()
+  for i in trees: 
+    col.add(i[x])
+
+  let lSeq = trees[y][0..x-1]
+  let rSeq = trees[y][x+1..^1] 
+  let uSeq = col[0..y-1]
+  let dSeq = col[y+1..^1]
+  
+  echo "left",siteLine(lSeq,checkHeight), "right",siteLine(rSeq,checkHeight), "up",siteLine(uSeq,checkHeight), "down",siteLine(dSeq,checkHeight)
+  return (siteLine(lSeq,checkHeight)*
+          siteLine(rSeq,checkHeight)*
+          siteLine(uSeq,checkHeight)*
+          siteLine(dSeq,checkHeight) )
 
 var visString = "" 
-
-var total_vis = 0
+var maxScene = 0
+var totalVis = 0
 for y in 0..trees.len-1:
   for x in 0..trees[0].len-1:
     if checkVis(trees,x,y):
-      total_vis+=1
+      totalVis+=1
       visString.add( green($trees[y][x]) )
     else:
       visString.add( grey($trees[y][x]) )
+    let curScene = checkScenery(trees,x,y)
+    if (curScene > maxScene): maxScene = curScene
   visString.add("\n")
 
 echo visString
-echo total_vis
+echo "P1: ",totalVis
+echo "P2: ",maxScene
