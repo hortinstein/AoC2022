@@ -23,13 +23,12 @@ proc checkVis(trees: seq[seq[int]],x: int, y: int): bool=
   let checkHeight = trees[y][x] #rows/columns
   if (x == 0 or y == 0): #check edge
     return true
-  if checkHeight < trees[y][maxIndex(trees[y][0..x])]: #check left
-    return true
-  if checkHeight < trees[y][maxIndex(trees[y][x..^1])]: #check left
+  let maxCol = maxIndex(trees[y])
+  if checkHeight < col[maxCol] and maxCol != x: #check left
     return true
   var col = newSeq[int]()
-  for i in trees: #check up
-    col.add(i)
+  for i in trees: 
+    col.add(i[x])
   let maxRow = maxIndex(col)
   if checkHeight < col[maxRow] and maxRow != y: #check left
     return true
