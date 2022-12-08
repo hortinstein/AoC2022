@@ -92,6 +92,7 @@ for y in 0..trees.len-1:
     else:
       visString.add( grey($trees[y][x]) )
     let curScene = checkScenery(trees,x,y)
+    echo curScene
     if (curScene > maxScene): maxScene = curScene
   visString.add("\n")
 
