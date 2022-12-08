@@ -19,24 +19,28 @@ for line in lines:
 
 var visible = newSeq[seq[char]]()
 
-proc checkVis(trees: newSeq[seq[int]],x: int, y: int): bool=
-  let checkHeight = newSeq[y][x] #rows/columns ;(
+proc checkVis(trees: seq[seq[int]],x: int, y: int): bool=
+  let checkHeight = trees[y][x] #rows/columns
   if (x == 0 or y == 0): #check edge
     return true
-  if checkHeight < trees[y][maxIndex(trees[y](0..x))]: #check left
+  if checkHeight < trees[y][maxIndex(trees[y][0..x])]: #check left
     return true
-  if checkHeight < trees[y][maxIndex(trees[y](x..^1))]: #check left
+  if checkHeight < trees[y][maxIndex(trees[y][x..^1])]: #check left
     return true
   var col = newSeq[int]()
   for i in trees: #check up
     col.add(i)
-  maxRow = maxIndex(col)
+  let maxRow = maxIndex(col)
   if checkHeight < col[maxRow] and maxRow != y: #check left
     return true
+  return false
+
+var total_vis = 0
+for y in 0..trees.len-1:
+  for x in 0..trees[0].len-1:
+    if checkVis(trees,x,y):
+      total_vis+=1
 
 
-for i in 0..trees.len-1:
-  for j in 0..trees[0].len-1:
-    
 
-
+echo total_vis
