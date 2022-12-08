@@ -24,7 +24,7 @@ proc checkVis(trees: seq[seq[int]],x: int, y: int): bool=
   if (x == 0 or y == 0): #check edge
     return true
   let maxCol = maxIndex(trees[y])
-  if checkHeight < col[maxCol] and maxCol != x: #check left
+  if checkHeight < trees[y][maxCol] and maxCol != x: #check left
     return true
   var col = newSeq[int]()
   for i in trees: 
