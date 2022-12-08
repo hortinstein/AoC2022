@@ -64,18 +64,31 @@ proc siteLine(lineOfSight: seq[int], height: int): int=
     i+=1
   return i
 
+
+proc reverseSeq(s:seq[int]): seq[int] = 
+  var result = newSeq[int]()
+  var i = 0
+  echo s, s.len
+  while i < s.len: 
+    result.add(s[^(i+1)])
+    i+=1
+  return result
+
 proc checkScenery(lineOfSight: seq[seq[int]], x: int, y: int): int=
   let checkHeight = trees[y][x] #rows/columns
   var col = newSeq[int]()
   for i in trees: 
     col.add(i[x])
 
-  let lSeq = trees[y][0..x-1]
+  let lSeq = reverseSeq(trees[y][0..x-1])
   let rSeq = trees[y][x+1..^1] 
-  let uSeq = col[0..y-1]
+  let uSeq = reverseSeq(col[0..y-1])
   let dSeq = col[y+1..^1]
   
-  echo "left",siteLine(lSeq,checkHeight), "right",siteLine(rSeq,checkHeight), "up",siteLine(uSeq,checkHeight), "down",siteLine(dSeq,checkHeight)
+  #echo "left: ",lSeq,siteLine(lSeq,checkHeight), 
+  #     "right: ",rSeq,siteLine(rSeq,checkHeight), 
+  #     "up: ",uSeq,siteLine(uSeq,checkHeight), 
+  #     "down: ",dSeq,siteLine(dSeq,checkHeight)
   return (siteLine(lSeq,checkHeight)*
           siteLine(rSeq,checkHeight)*
           siteLine(uSeq,checkHeight)*
