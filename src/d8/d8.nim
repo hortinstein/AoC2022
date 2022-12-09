@@ -27,7 +27,7 @@ for line in lines:
 
 proc checkVis(trees: seq[seq[int]],x: int, y: int): bool=
   let checkHeight = trees[y][x] #rows/columns
-  echo red("new item checked: "& $checkHeight)  
+  # echo red("new item checked: "& $checkHeight)  
   if (x == 0 or y == 0 or x == trees[0].len-1 or y == trees.len-1): #check edge
     #echo "corner/edge"
     return true
@@ -68,7 +68,7 @@ proc siteLine(lineOfSight: seq[int], height: int): int=
 proc reverseSeq(s:seq[int]): seq[int] = 
   var result = newSeq[int]()
   var i = 0
-  echo s, s.len
+  # echo s, s.len
   while i < s.len: 
     result.add(s[^(i+1)])
     i+=1
@@ -85,7 +85,7 @@ proc checkScenery(lineOfSight: seq[seq[int]], x: int, y: int): int=
   let uSeq = reverseSeq(col[0..y-1])
   let dSeq = col[y+1..^1]
   
-  #echo "left: ",lSeq,siteLine(lSeq,checkHeight), 
+  # echo "left: ",lSeq,siteLine(lSeq,checkHeight), 
   #     "right: ",rSeq,siteLine(rSeq,checkHeight), 
   #     "up: ",uSeq,siteLine(uSeq,checkHeight), 
   #     "down: ",dSeq,siteLine(dSeq,checkHeight)
@@ -105,7 +105,7 @@ for y in 0..trees.len-1:
     else:
       visString.add( grey($trees[y][x]) )
     let curScene = checkScenery(trees,x,y)
-    echo curScene
+    #echo curScene
     if (curScene > maxScene): maxScene = curScene
   visString.add("\n")
 
