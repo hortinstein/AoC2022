@@ -18,7 +18,8 @@ namedBin = {"benchmark": "benchmark",
             "d5/d5": "d5",
             "d6/d6": "d6",
             "d7/d7": "d7",
-            "d8/d8":"d8"}.toTable()
+            "d8/d8":"d8",
+            "d9/d9":"d9"}.toTable()
 
 # Dependencies
 requires "nim >= 1.6.6"
